@@ -13,6 +13,8 @@ else
 {
     var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
 
+    Console.WriteLine("DATABASE_URL=" + connectionString);
+
     builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseNpgsql(connectionString));
 }
