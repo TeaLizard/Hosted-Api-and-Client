@@ -62,8 +62,6 @@ packages/
 *.pubxml
 *.publishsettings
 
-# Entity Framework
-Migrations/
 
 # User secrets
 secrets.json
