@@ -20,4 +20,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\Postgres\" />
+    <Folder Include="Migrations\Sqlite\" />
+  </ItemGroup>
+
 </Project>
