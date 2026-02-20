@@ -27,6 +27,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.MapGet("/health", () => Results.Ok("Healthy"));
+
 if (!app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();
