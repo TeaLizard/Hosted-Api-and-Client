@@ -61,6 +61,7 @@ namespace PROG3176_Assignment2.Controllers
             if (existingAnimal == null)
                 return NotFound();
 
+            animal.Id = id;
             var result = _repository.Update(animal);
             return Ok(result);
         }
