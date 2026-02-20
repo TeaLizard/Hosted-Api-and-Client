@@ -12,5 +12,12 @@ namespace PROG3176_Assignment2.Controllers
         {
             return Ok("API is working!");
         }
+
+        [HttpGet("connection")]
+        public IActionResult GetConnectionString()
+        {
+            var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+            return Ok(connectionString);
+        }
     }
 }
