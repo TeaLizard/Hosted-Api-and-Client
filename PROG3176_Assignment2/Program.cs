@@ -4,21 +4,18 @@ using PROG3176_Assignment2.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+string connectionString;
 if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseSqlite("Data Source=TestDb.db",
-            x => x.MigrationsAssembly("PROG3176_Assignment2.Migrations.Sqlite")));
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 }
 else
 {
-    var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
-
-    builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseNpgsql(connectionString,
-            x => x.MigrationsAssembly("PROG3176_Assignment2.Migrations.Postgres")));
+    connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
 }
-
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 
 builder.Services.AddScoped<AnimalRepository>();
@@ -29,13 +26,6 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
-
-if (app.Environment.IsProduction())
-{
-    using var scope = app.Services.CreateScope();
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
-}
 
 app.UseSwagger();
 app.UseSwaggerUI();
